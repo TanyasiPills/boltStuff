@@ -17,6 +17,7 @@
         <% } %>
         </div>
         <br/>
+        <div>
         <hr>
         <p>Személyes adatok:</p>
         <ul>
@@ -25,26 +26,42 @@
                 <input type="text" name="nev"><br>
             </div>
             <div>
-                <label for="postCode">Post Code:<br/></label>
-                <input type="text" name="postCode"><br>
+                <p>Szállítási adatok:</p>
+                <label for="postCode">PostCode:</label>
+                <input type="text" name="postCode">
+                <label for="city">Város:</label>
+                <input type="text" name="city"><br>
+                <label for="street">Utca:</label>
+                <input type="text" name="street">
+                <label for="num">Házszám:</label>
+                <input type="text" name="num"><br>
             </div>   
+            <div>
+                <p>Számlázási adatok:</p>
+                <label for="postCode">PostCode:</label>
+                <input type="text" name="postCode">
+                <label for="city">Város:</label>
+                <input type="text" name="city"><br>
+                <label for="street">Utca:</label>
+                <input type="text" name="street">
+                <label for="num">Házszám:</label>
+                <input type="text" name="num"><br>
+            </div> 
         </ul>
         <hr>
         <p>Banki adatok:</p>
         <ul>
-            <div>
-                <label for="nev">Bankártyaszám:<br/></label>
-                <input type="text" name="nev"><br>
-            </div>
-            <div>
+            <div class="stuff">
+                <label for="szam">Bankártyaszám:</label>
+                <input type="text" name="szam"><br/>
                 <label for="datum">Lejárati dátum:</label>
-                <input type="date" name="datum"><br>
+                <input type="date" name="datum"><br/>
                 <label for="pin">Pin:</label>
                 <input type="text" name="pin">
-            </div>   
+            </div>
         </ul>
-
-        <input type="submit" value="Új számla">
+        </div>
+        <input type="submit" value="Vásárlás">
     </form>
 </body>
 </html>
