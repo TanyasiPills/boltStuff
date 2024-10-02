@@ -18,49 +18,63 @@
         </div>
         <br/>
         <div>
-        <hr>
-        <p>Személyes adatok:</p>
-        <ul>
-            <div>
-                <label for="nev">Teljes név:<br/></label>
-                <input type="text" name="nev"><br>
-            </div>
-            <div>
-                <p>Szállítási adatok:</p>
-                <label for="postCode">PostCode:</label>
-                <input type="text" name="postCode">
-                <label for="city">Város:</label>
-                <input type="text" name="city"><br>
-                <label for="street">Utca:</label>
-                <input type="text" name="street">
-                <label for="num">Házszám:</label>
-                <input type="text" name="num"><br>
-            </div>   
-            <div>
-                <p>Számlázási adatok:</p>
-                <label for="postCode">PostCode:</label>
-                <input type="text" name="postCode">
-                <label for="city">Város:</label>
-                <input type="text" name="city"><br>
-                <label for="street">Utca:</label>
-                <input type="text" name="street">
-                <label for="num">Házszám:</label>
-                <input type="text" name="num"><br>
-            </div> 
-        </ul>
-        <hr>
-        <p>Banki adatok:</p>
-        <ul>
-            <div class="stuff">
-                <label for="szam">Bankártyaszám:</label>
-                <input type="text" name="szam"><br/>
-                <label for="datum">Lejárati dátum:</label>
-                <input type="date" name="datum"><br/>
-                <label for="pin">Pin:</label>
-                <input type="text" name="pin">
-            </div>
-        </ul>
+            <hr>
+            <p>Személyes adatok:</p>
+            <ul>
+                <div>
+                    <label for="name">Teljes név:<br/></label>
+                    <input type="text" name="name" id="name" value="<%= data.name %>"><br>
+                </div>
+        
+                <div>
+                    <p>Szállítási adatok:</p>
+                    <label for="post_id">PostCode:</label>
+                    <input type="text" name="post_id" id="post_id" value="<%= data.post_id %>"><br>
+        
+                    <label for="post_city">Város:</label>
+                    <input type="text" name="post_city" id="post_city" value="<%= data.post_city %>"><br>
+        
+                    <label for="post_street">Utca:</label>
+                    <input type="text" name="post_street" id="post_street" value="<%= data.post_street %>"><br>
+        
+                    <label for="post_houseNumber">Házszám:</label>
+                    <input type="text" name="post_houseNumber" id="post_houseNumber" value="<%= data.post_houseNumber %>"><br>
+                </div>   
+        
+                <div>
+                    <p>Számlázási adatok:</p>
+                    <label for="bill_id">PostCode:</label>
+                    <input type="text" name="bill_id" id="bill_id" value="<%= data.bill_id %>"><br>
+        
+                    <label for="bill_city">Város:</label>
+                    <input type="text" name="bill_city" id="bill_city" value="<%= data.bill_city %>"><br>
+        
+                    <label for="bill_street">Utca:</label>
+                    <input type="text" name="bill_street" id="bill_street" value="<%= data.bill_street %>"><br>
+        
+                    <label for="bill_houseNumber">Házszám:</label>
+                    <input type="text" name="bill_houseNumber" id="bill_houseNumber" value="<%= data.bill_houseNumber %>"><br>
+        
+                    <label for="bill_number">Számla szám:</label>
+                    <input type="text" name="bill_number" id="bill_number" value="<%= data.bill_number %>"><br>
+                </div> 
+            </ul>
+            <hr>
+            <p>Banki adatok:</p>
+            <ul>
+                <div class="stuff">
+                    <label for="purchase_number">Bankártyaszám:</label>
+                    <input type="text" name="purchase_number" id="purchase_number"><br/>
+        
+                    <label for="purchase_expire">Lejárati dátum:</label>
+                    <input type="date" name="purchase_expire" id="purchase_expire"><br/>
+        
+                    <label for="purchase_pin">Pin:</label>
+                    <input type="text" name="purchase_pin" id="purchase_pin">
+                </div>
+            </ul>
         </div>
+        <% for(let item of errors){%><p style="color: red;"><%=item%></p><%}%>
         <input type="submit" value="Vásárlás">
     </form>
 </body>
