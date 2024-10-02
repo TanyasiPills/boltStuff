@@ -5,11 +5,26 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  items = [
+    {
+      id: "big",
+      img: "/big.png"
+    },
+    {
+      id: "smol",
+      img: "/smol.png"
+    },
+    {
+      id: "pink",
+      img: '/pink.png'
+    }
+  ]
+
   @Get()
-  @Render('index')
+  @Render('shop')
   getHello() {
     return {
-      message: this.appService.getHello()
+      products: this.items
     };
   }
 }

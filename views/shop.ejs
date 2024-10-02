@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <form method="post" class="contains">
+        <div class="container">
+        <% for(item of products) {%>
+                <label for="<%=item.id%>" class="product">
+                    <img src="<%=item.img%>" alt="blahaj">
+                    <input type="radio" name="blahaj" id="<%=item.id%>" value="<%=item.id%>">
+                <%=item.id%> blahaj</label>
+        <% } %>
+        </div>
+        <br/>
+        <hr>
+        <p>Személyes adatok:</p>
+        <ul>
+            <div>
+                <label for="nev">Teljes név:<br/></label>
+                <input type="text" name="nev"><br>
+            </div>
+            <div>
+                <label for="postCode">Post Code:<br/></label>
+                <input type="text" name="postCode"><br>
+            </div>   
+        </ul>
+        <hr>
+        <p>Banki adatok:</p>
+        <ul>
+            <div>
+                <label for="nev">Bankártyaszám:<br/></label>
+                <input type="text" name="nev"><br>
+            </div>
+            <div>
+                <label for="postCode">Lejárati dátum:</label>
+                <input type="text" name="postCode"><br>
+            </div>   
+        </ul>
+
+        <input type="submit" value="Új számla">
+    </form>
+</body>
+</html>
