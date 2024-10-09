@@ -1,66 +1,32 @@
 import { Body, Controller, Get, Post, Render, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Response } from 'express';
+import { appendFileSync, statSync, writeFileSync } from 'node:fs';
+
 
 export class Buy{
   name: string;
-  post_id: string;             
-  post_city: string;           
-  post_street: string;         
-  post_houseNumber: string;    
-  bill_id: string;             
-  bill_city: string;           
-  bill_street: string;         
-  bill_houseNumber: string;    
-  bill_number: string;         
-  purchase_number: string;     
-  purchase_expire: Date;       
-  purchase_pin: string; 
-  blahaj: string;       
+  bankCard: string;
+  enable: boolean;       
 
   constructor() {
     this.name = '';
-    this.post_id = '';
-    this.post_city = '';
-    this.post_street = '';
-    this.post_houseNumber = '';
-    this.bill_id = '';
-    this.bill_city = '';
-    this.bill_street = '';
-    this.bill_houseNumber = '';
-    this.bill_number = '';
-    this.purchase_number = '';
-    this.purchase_expire = new Date();
-    this.purchase_pin = '';
-    this.blahaj = '';
+    this.bankCard = '';
+    this.enable = false;
   }
 }
+
+  var buyC : Buy = new Buy();
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  items = [
-    {
-      id: "big",
-      img: "/big.png"
-    },
-    {
-      id: "smol",
-      img: "/smol.png"
-    },
-    {
-      id: "pink",
-      img: '/pink.png'
-    }
-  ]
-
   @Get()
   @Render('shop')
   getHello() {
-    return {
-      products: this.items,
-      data: new Buy(),
+    return {    
+      data: buyC,
       errors: []
     };
   }
@@ -69,48 +35,36 @@ export class AppController {
     @Body() buy: Buy, 
     @Res() response: Response)
     {
+      const regex = new RegExp("/^\d{0,8}(-\d{0,8})?(-\d{0,8})?$/");
       let error = [];
-      if(buy.blahaj == null){
-        error.push("Nem választottál cukiságot");
-      }
-      if(buy.purchase_number.length != 16) {
-        error.push("A bankártyaszám nem értelmezhető");
-      }
-      if(buy.purchase_pin.length != 4) {
-        error.push("A kártya pinje érnóvénytelen");
-      }
-      if(new Date(buy.purchase_expire) < new Date()) {
-        error.push("A kártya már lejárt");
-      }
       if(!buy.name){
         error.push("Minden mezőt meg kell adni");
+      }
+      if(regex.test(buy.bankCard)){
+        error.push("Nem megfelelő a megadott bankszámlaszám");
+      }
+      if(!buy.enable){
+        error.push("El kell fogadni a felhasználói feltételeket");
       }
       if (error.length > 0){
         let newBuy = new Buy();
         newBuy.name = buy.name;
-        newBuy.post_id = buy.post_id; 
-        newBuy.post_city = buy.post_city;
-        newBuy.post_street = buy.post_street;
-        newBuy.post_houseNumber = buy.post_houseNumber;
+        newBuy.bankCard = buy.bankCard;
+        newBuy.enable = buy.enable;
 
-        newBuy.bill_id = buy.bill_id; 
-        newBuy.bill_city = buy.bill_city;
-        newBuy.bill_street = buy.bill_street;
-        newBuy.bill_houseNumber = buy.bill_houseNumber;
-        newBuy.bill_number = buy.bill_number;
         response.render('shop', {
-          products: this.items,
           data: newBuy,
           errors : error
         });
         return;
       }
-    
+    buyC = buy;
     response.redirect('/success');
   }
   @Get('success')
   @Render('success')
   loadSuccess(){
-
+    if(statSync('data.csv').size != 0)  appendFileSync('data.csv',"\n");
+    appendFileSync('data.csv',`${buyC.name};${buyC.bankCard};`);
   }
 }
